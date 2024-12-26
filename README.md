@@ -41,7 +41,6 @@ Le code source complet est disponible dans le [Dépôt GitHub](https://github.co
 
 Les contributions sont les bienvenues ! Que ce soit pour signaler des problèmes, suggérer des fonctionnalités ou soumettre des pull requests, votre participation aide à améliorer le projet.
 
-1. **Forkez le Dépôt** : Cliquez sur le bouton "Fork" sur la page du dépôt.
-2. **Clonez Votre Fork** :
-   ```bash
-   git clone https://github.com/chub-web/VegasPro22Patcher.git
+## Avertissement
+
+Utilisez ce patcher à **vos propres risques**. Nous ne sont pas responsables de tout dommage ou perte de données résultant de l'utilisation de cet outil. Assurez-vous toujours d'avoir des sauvegardes avant d'appliquer des patches.
