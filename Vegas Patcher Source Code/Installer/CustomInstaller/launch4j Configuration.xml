@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\Users\Dany\Desktop\CustomInstaller.jar</jar>
+  <outfile>C:\Users\Dany\Desktop\Custom.exe</outfile>
+  <errTitle>CustomInstaller Error</errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>https://download.oracle.com/java/23/latest/jdk-23_windows-x64_bin.exe</downloadUrl>
+  <supportUrl>https://github.com/danbenba/CustomInstaller/</supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>C:\Users\Dany\Desktop\icon.ico</icon>
+  <jre>
+    <path>%JAVA_HOME%;%PATH%</path>
+    <requiresJdk>true</requiresJdk>
+    <requires64Bit>true</requires64Bit>
+    <minVersion>8</minVersion>
+    <maxVersion>24</maxVersion>
+  </jre>
+  <versionInfo>
+    <fileVersion>2.0.0.0</fileVersion>
+    <txtFileVersion>2.0</txtFileVersion>
+    <fileDescription>CustomInstaller Version 2.0 Preview</fileDescription>
+    <copyright>© 2024 danbenba. Tous droits réservés.</copyright>
+    <productVersion>2.0.0.0</productVersion>
+    <txtProductVersion>2.0</txtProductVersion>
+    <productName>CustomInstaller</productName>
+    <companyName></companyName>
+    <internalName>CustomInstaller Preview</internalName>
+    <originalFilename>CustomInstaller.exe</originalFilename>
+    <trademarks></trademarks>
+    <language>FRENCH</language>
+  </versionInfo>
+  <messages>
+    <startupErr>An error occurred while starting the application.</startupErr>
+    <jreNotFoundErr>This application requires a Java Runtime Environment.</jreNotFoundErr>
+    <jreVersionErr>This application requires a Java Runtime Environment</jreVersionErr>
+    <launcherErr>The registry refers to a nonexistent Java Runtime Environment installation or the runtime is corrupted.</launcherErr>
+    <instanceAlreadyExistsMsg>An application instance is already running.</instanceAlreadyExistsMsg>
+  </messages>
+</launch4jConfig>
