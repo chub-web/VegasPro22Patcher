@@ -26,7 +26,7 @@
 ::ZQ0/vhVqMQ3MEVWAtB9wSA==
 ::Zg8zqx1/OA3MEVWAtB9wSA==
 ::dhA7pRFwIByZRRnk
-::Zh4grVQjdCyDJGyX8VAjFD9VQh2+GG6pDaET+NTr7v6EqkgPGucnfe8=
+::Zh4grVQjdCyDJGyX8VAjFD9VQh2+GG6pDaET+NTv4vqEq0MOQOMzdIrJ5oKLJ+EA2lfrJ8Qd125ZkM4eMC1deRO4Lj81vW1Ks3bFBMiJoQzkCmuG4k4MK2RghGvVnhcrYcdrksYRnSWm+S0=
 ::YB416Ek+ZW8=
 ::
 ::
@@ -112,7 +112,7 @@ REM ============================================
 REM Add patcher.exe to RunOnce for a one-time launch after restart
 REM ============================================
 echo %FG_CYAN%Registering patch in Vegas Pro...%RESET%
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce" /v Patcher /t REG_SZ /d "C:\Program Files\VEGAS\VEGAS Pro 22.0\patch.exe" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce" /v Patcher /t REG_SZ /d "C:\Program Files\VEGAS\VEGAS Pro 22.0\vpatch.exe" /f
 
 if %errorlevel% neq 0 (
     echo.
