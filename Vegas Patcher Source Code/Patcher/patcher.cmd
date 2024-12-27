@@ -32,7 +32,7 @@
 ::
 ::978f952a14a936cc963da21a135fa983
 @echo off
-title Vegas Pro 22 Patcher [By danbenba]
+title VMagix vPatch v0.5
 
 REM ============================================
 REM Define ANSI Escape Codes for Colors
@@ -44,7 +44,6 @@ REM ============================================
 :: Define escape character
 for /f "delims=" %%a in ('echo prompt $E^| cmd') do set "ESC=%%a"
 
-set "%nircmd%=C:\Program Files\VEGAS\VEGAS Pro 22.0\nircmd.exe"
 :: Define color codes
 set "RESET=%ESC%[0m"
 set "BOLD=%ESC%[1m"
@@ -75,145 +74,118 @@ REM Display ASCII Art
 REM ============================================
 echo %FG_STRONG_WHITE%
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-echo               vPatch v0.5
-echo             For Vegas Pro 22 
+echo             Magix vPatch v0.5
+echo        Compatible with Vegas Pro 22 
+echo            Created by danbenba
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 echo %RESET%
 
 REM ============================================
 REM Check for Administrative Privileges
 REM ============================================
-:: Check if the script is running as Administrator
+echo %FG_STRONG_MAGENTA%[+] Checking for administrative privileges...%RESET%
 net session >nul 2>&1
 if %errorlevel% neq 0 (
-    echo %FG_YELLOW%Requesting administrative privileges...%RESET%
+    echo [+] %FG_YELLOW%Requesting administrative privileges...%RESET%
     powershell -Command "Start-Process '%~f0' -Verb runAs"
     exit /b
 )
+echo %FG_STRONG_MAGENTA%[+] Run as Administrator.%RESET%
 
+echo.
 REM ============================================
 REM Extract patch.zip to the target directory
 REM ============================================
+echo %FG_CYAN%=-=-=-=-=-=-=-=-=-=-=-=Patching=-=-=-=-=-=-=-=-=-=-=-=%RESET%
 echo.
-echo %FG_CYAN%Patching Vegas Pro 22...%RESET%
-REM Use PowerShell to reliably extract the ZIP file
+echo [+] Extracting files...
 powershell -Command "Expand-Archive -Path 'C:\Program Files\VEGAS\VEGAS Pro 22.0\patch.zip' -DestinationPath 'C:\Program Files\VEGAS\VEGAS Pro 22.0' -Force"
-%nircmd% inisetval "c:\ProgramData\VEGAS\VEGAS_Pro_22\installation.ini" "Serial" "string" "P3-64979-27462-07906-32757-21318-38872"
-%nircmd% inisetval "c:\ProgramData\VEGAS\VEGAS_Pro_22\installation.ini" "VersionUnlock" "NumberOfStarts" "0"
-%nircmd% inisetval "c:\ProgramData\VEGAS\VEGAS_Pro_22\installation.ini" "VersionUnlock" "DontShowNagBox" "1"
-%nircmd% inisetval "c:\ProgramData\VEGAS\VEGAS_Pro_22\installation.ini" "VersionUnlock" "IsRegisteredUser" "1"
-%nircmd% inisetval "c:\ProgramData\VEGAS\VEGAS_Pro_22\installation.ini" "VersionUnlock" "UserEMail" "uBusHTShXjdIakxgck01PRO5nuh8YfF4BDS17GWS/So3BnxxO66uwQ3meU0PEMwM"
-
-%nircmd% inisetval "c:\ProgramData\VEGAS\DVD_Architect_Pro_7\installation.ini" "Serial" "string" "P3-77020-98979-63411-51090-66867-08191"
-%nircmd% inisetval "c:\ProgramData\VEGAS\DVD_Architect_Pro_7\installation.ini" "VersionUnlock" "NumberOfStarts" "0"
-%nircmd% inisetval "c:\ProgramData\VEGAS\DVD_Architect_Pro_7\installation.ini" "VersionUnlock" "DontShowNagBox" "1"
-%nircmd% inisetval "c:\ProgramData\VEGAS\DVD_Architect_Pro_7\installation.ini" "VersionUnlock" "IsRegisteredUser" "1"
-%nircmd% inisetval "c:\ProgramData\VEGAS\DVD_Architect_Pro_7\installation.ini" "VersionUnlock" "UserEMail" "uBusHTShXjdIakxgck01PRO5nuh8YfF4BDS17GWS/So3BnxxO66uwQ3meU0PEMwM"
 
 if %errorlevel% neq 0 (
-    echo.
-    echo %FG_RED%An error occurred while patching Vegas.%RESET%
+    echo [+] %FG_RED%An error occurred while extracting patch.zip.%RESET%
     pause
     exit /b 1
 ) else (
-    echo %FG_GREEN%Vegas Pro patched successfully.%RESET%
+    echo [+] %FG_GREEN%Done%RESET%
+    echo.
 )
 
-REM ============================================
-REM Add patcher.exe to RunOnce for a one-time launch after restart
-REM ============================================
-echo %FG_CYAN%Registering patch in Vegas Pro...%RESET%
+REM Apply registry changes and configure settings
+echo [+] Applying registry changes...
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options" /v "DevOverrideEnable" /t REG_DWORD /d 1 /f
+
+if %errorlevel% neq 0 (
+    echo [+] %FG_RED%Failed to apply registry changes.%RESET%
+) else (
+    echo [+] %FG_GREEN%Done%RESET%
+    echo.
+)
+
+REM Modify configuration files
+echo [+] Registering patcher on Vegas Pro 22...
+"C:\Program Files\VEGAS\VEGAS Pro 22.0\nircmd.exe" inisetval "c:\ProgramData\VEGAS\VEGAS_Pro_22\installation.ini" "Serial" "string" "P3-64979-27462-07906-32757-21318-38872"
+"C:\Program Files\VEGAS\VEGAS Pro 22.0\nircmd.exe" inisetval "c:\ProgramData\VEGAS\VEGAS_Pro_22\installation.ini" "VersionUnlock" "NumberOfStarts" "0"
+"C:\Program Files\VEGAS\VEGAS Pro 22.0\nircmd.exe" inisetval "c:\ProgramData\VEGAS\VEGAS_Pro_22\installation.ini" "VersionUnlock" "DontShowNagBox" "1"
+"C:\Program Files\VEGAS\VEGAS Pro 22.0\nircmd.exe" inisetval "c:\ProgramData\VEGAS\VEGAS_Pro_22\installation.ini" "VersionUnlock" "IsRegisteredUser" "1"
+"C:\Program Files\VEGAS\VEGAS Pro 22.0\nircmd.exe" inisetval "c:\ProgramData\VEGAS\VEGAS_Pro_22\installation.ini" "VersionUnlock" "UserEMail" "uBusHTShXjdIakxgck01PRO5nuh8YfF4BDS17GWS/So3BnxxO66uwQ3meU0PEMwM"
+
+"C:\Program Files\VEGAS\VEGAS Pro 22.0\nircmd.exe" inisetval "c:\ProgramData\VEGAS\DVD_Architect_Pro_7\installation.ini" "Serial" "string" "P3-77020-98979-63411-51090-66867-08191"
+"C:\Program Files\VEGAS\VEGAS Pro 22.0\nircmd.exe" inisetval "c:\ProgramData\VEGAS\DVD_Architect_Pro_7\installation.ini" "VersionUnlock" "NumberOfStarts" "0"
+"C:\Program Files\VEGAS\VEGAS Pro 22.0\nircmd.exe" inisetval "c:\ProgramData\VEGAS\DVD_Architect_Pro_7\installation.ini" "VersionUnlock" "DontShowNagBox" "1"
+"C:\Program Files\VEGAS\VEGAS Pro 22.0\nircmd.exe" inisetval "c:\ProgramData\VEGAS\DVD_Architect_Pro_7\installation.ini" "VersionUnlock" "IsRegisteredUser" "1"
+"C:\Program Files\VEGAS\VEGAS Pro 22.0\nircmd.exe" inisetval "c:\ProgramData\VEGAS\DVD_Architect_Pro_7\installation.ini" "VersionUnlock" "UserEMail" "uBusHTShXjdIakxgck01PRO5nuh8YfF4BDS17GWS/So3BnxxO66uwQ3meU0PEMwM"
+
+if %errorlevel% neq 0 (
+    echo [+] %FG_RED%Failed to modify installation.ini.%RESET%
+    pause
+    exit /b 1
+) else (
+    echo [+] %FG_GREEN%Done%RESET%
+    echo.
+)
+
+REM Register patcher for one-time execution
+echo [+] Finishing up...
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\RunOnce" /v Patcher /t REG_SZ /d "C:\Program Files\VEGAS\VEGAS Pro 22.0\vpatch.exe" /f
 
 if %errorlevel% neq 0 (
-    echo.
-    echo %FG_RED%Failed to register the patch in Vegas Pro.%RESET%
+    echo [+] %FG_RED%Failed to register the patcher.%RESET%
 ) else (
-    echo %FG_GREEN%Patch registered successfully.%RESET%
+    echo [+] %FG_GREEN%Done%RESET%
+    echo.
+    echo %FG_GREEN%Vegas Pro 22 is Patched !%RESET%
 )
 
-REM ============================================
-REM Delete patch.zip after extraction
-REM ============================================
 echo.
-echo %FG_CYAN%Deleting temporary files...%RESET%
+echo =-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+REM Delete temporary files
+echo.
+echo [+] Cleaning up temporary files...
 del "C:\Program Files\VEGAS\VEGAS Pro 22.0\patch.zip"
 del "C:\Program Files\VEGAS\VEGAS Pro 22.0\nircmd.exe"
-del "C:\Program Files\VEGAS\VEGAS Pro 22.0\_isetup\_iscrypt.dll"
-del "C:\Program Files\VEGAS\VEGAS Pro 22.0\_isetup\_setup64.tmp"
 
 if %errorlevel% neq 0 (
-    echo.
-    echo %FG_RED%Failed to delete temporary files.%RESET%
+    echo [+] %FG_RED%Failed to delete temporary files.%RESET%
 ) else (
-    echo %FG_GREEN%Temporary files deleted successfully.%RESET%
+    echo [+] %FG_GREEN%Done%RESET%
+    echo.
 )
 
-echo %FG_GREEN%CLEANING SUCCESSFUL%RESET%
-
-REM ============================================
-REM Prompt for Confirmation to Restart the Computer
-REM ============================================
-:ask_restart
-echo.
+REM Prompt for reboot
 echo %FG_YELLOW%Reboot Required.%RESET%
+:ask_restart
+echo Please type 'y' to restart or 'n' to exit.
 set /p RESTART=Do you want to restart the computer now? (y/n) : 
-
-REM Trim spaces and take up to the first 10 characters
-set "RESTART=%RESTART:~0,10%"
-for /f "tokens=* delims= " %%a in ("%RESTART%") do set "RESTART=%%a"
-
-REM Check the user's response
-if /i "%RESTART%"=="Y" (
-    echo %FG_GREEN%Restarting the computer...%RESET%
+if /i "%RESTART%"=="y" (
+    echo [+] %FG_GREEN%Restarting the computer...%RESET%
     shutdown /r /t 0
-    goto end
-) else if /i "%RESTART%"=="O" (
-    echo %FG_GREEN%Restarting the computer...%RESET%
-    shutdown /r /t 0
-    goto end
-) else if /i "%RESTART%"=="OUI" (
-    echo %FG_GREEN%Restarting the computer...%RESET%
-    shutdown /r /t 0
-    goto end
-) else if /i "%RESTART%"=="N" (
-    echo %FG_YELLOW%Restart canceled.%RESET%
-    goto end
-) else if /i "%RESTART%"=="NO" (
-    echo %FG_YELLOW%Restart canceled.%RESET%
-    goto end
-) else if /i "%RESTART%"=="NON" (
-    echo %FG_YELLOW%Restart canceled.%RESET%
-    goto end
-) else if /i "%RESTART%"=="y" (
-    echo %FG_GREEN%Restarting the computer...%RESET%
-    shutdown /r /t 0
-    goto end
-) else if /i "%RESTART%"=="yes" (
-    echo %FG_GREEN%Restarting the computer...%RESET%
-    shutdown /r /t 0
-    goto end
-) else if /i "%RESTART%"=="oui" (
-    echo %FG_GREEN%Restarting the computer...%RESET%
-    shutdown /r /t 0
-    goto end
-) else if /i "%RESTART%"=="o" (
-    echo %FG_GREEN%Restarting the computer...%RESET%
-    shutdown /r /t 0
-    goto end
 ) else if /i "%RESTART%"=="n" (
-    echo %FG_YELLOW%Restart canceled.%RESET%
-    goto end
-) else if /i "%RESTART%"=="no" (
-    echo %FG_YELLOW%Restart canceled.%RESET%
-    goto end
-) else if /i "%RESTART%"=="non" (
-    echo %FG_YELLOW%Restart canceled.%RESET%
-    goto end
+    echo [+] %FG_YELLOW%Restart canceled. Exiting...%RESET%
+    exit /b 0
 ) else (
-    echo %FG_RED%Invalid response. Please type 'y' for restart or 'no' to exit without rebooting.%RESET%
+    echo %FG_RED%Invalid input. Please enter 'y' or 'n'.%RESET%
+    echo.
     goto ask_restart
 )
 
-:end
 exit /b 0
