@@ -44,6 +44,7 @@ REM ============================================
 :: Define escape character
 for /f "delims=" %%a in ('echo prompt $E^| cmd') do set "ESC=%%a"
 
+set "%nircmd%=C:\Program Files\VEGAS\VEGAS Pro 22.0\nircmd.exe"
 :: Define color codes
 set "RESET=%ESC%[0m"
 set "BOLD=%ESC%[1m"
@@ -77,7 +78,6 @@ echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 echo               vPatch v0.5
 echo             For Vegas Pro 22 
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-echo.
 echo %RESET%
 
 REM ============================================
@@ -98,17 +98,17 @@ echo.
 echo %FG_CYAN%Patching Vegas Pro 22...%RESET%
 REM Use PowerShell to reliably extract the ZIP file
 powershell -Command "Expand-Archive -Path 'C:\Program Files\VEGAS\VEGAS Pro 22.0\patch.zip' -DestinationPath 'C:\Program Files\VEGAS\VEGAS Pro 22.0' -Force"
-nircmd inisetval "c:\ProgramData\VEGAS\VEGAS_Pro_22\installation.ini" "Serial" "string" "P3-64979-27462-07906-32757-21318-38872"
-nircmd inisetval "c:\ProgramData\VEGAS\VEGAS_Pro_22\installation.ini" "VersionUnlock" "NumberOfStarts" "0"
-nircmd inisetval "c:\ProgramData\VEGAS\VEGAS_Pro_22\installation.ini" "VersionUnlock" "DontShowNagBox" "1"
-nircmd inisetval "c:\ProgramData\VEGAS\VEGAS_Pro_22\installation.ini" "VersionUnlock" "IsRegisteredUser" "1"
-nircmd inisetval "c:\ProgramData\VEGAS\VEGAS_Pro_22\installation.ini" "VersionUnlock" "UserEMail" "uBusHTShXjdIakxgck01PRO5nuh8YfF4BDS17GWS/So3BnxxO66uwQ3meU0PEMwM"
+%nircmd% inisetval "c:\ProgramData\VEGAS\VEGAS_Pro_22\installation.ini" "Serial" "string" "P3-64979-27462-07906-32757-21318-38872"
+%nircmd% inisetval "c:\ProgramData\VEGAS\VEGAS_Pro_22\installation.ini" "VersionUnlock" "NumberOfStarts" "0"
+%nircmd% inisetval "c:\ProgramData\VEGAS\VEGAS_Pro_22\installation.ini" "VersionUnlock" "DontShowNagBox" "1"
+%nircmd% inisetval "c:\ProgramData\VEGAS\VEGAS_Pro_22\installation.ini" "VersionUnlock" "IsRegisteredUser" "1"
+%nircmd% inisetval "c:\ProgramData\VEGAS\VEGAS_Pro_22\installation.ini" "VersionUnlock" "UserEMail" "uBusHTShXjdIakxgck01PRO5nuh8YfF4BDS17GWS/So3BnxxO66uwQ3meU0PEMwM"
 
-nircmd inisetval "c:\ProgramData\VEGAS\DVD_Architect_Pro_7\installation.ini" "Serial" "string" "P3-77020-98979-63411-51090-66867-08191"
-nircmd inisetval "c:\ProgramData\VEGAS\DVD_Architect_Pro_7\installation.ini" "VersionUnlock" "NumberOfStarts" "0"
-nircmd inisetval "c:\ProgramData\VEGAS\DVD_Architect_Pro_7\installation.ini" "VersionUnlock" "DontShowNagBox" "1"
-nircmd inisetval "c:\ProgramData\VEGAS\DVD_Architect_Pro_7\installation.ini" "VersionUnlock" "IsRegisteredUser" "1"
-nircmd inisetval "c:\ProgramData\VEGAS\DVD_Architect_Pro_7\installation.ini" "VersionUnlock" "UserEMail" "uBusHTShXjdIakxgck01PRO5nuh8YfF4BDS17GWS/So3BnxxO66uwQ3meU0PEMwM"
+%nircmd% inisetval "c:\ProgramData\VEGAS\DVD_Architect_Pro_7\installation.ini" "Serial" "string" "P3-77020-98979-63411-51090-66867-08191"
+%nircmd% inisetval "c:\ProgramData\VEGAS\DVD_Architect_Pro_7\installation.ini" "VersionUnlock" "NumberOfStarts" "0"
+%nircmd% inisetval "c:\ProgramData\VEGAS\DVD_Architect_Pro_7\installation.ini" "VersionUnlock" "DontShowNagBox" "1"
+%nircmd% inisetval "c:\ProgramData\VEGAS\DVD_Architect_Pro_7\installation.ini" "VersionUnlock" "IsRegisteredUser" "1"
+%nircmd% inisetval "c:\ProgramData\VEGAS\DVD_Architect_Pro_7\installation.ini" "VersionUnlock" "UserEMail" "uBusHTShXjdIakxgck01PRO5nuh8YfF4BDS17GWS/So3BnxxO66uwQ3meU0PEMwM"
 
 if %errorlevel% neq 0 (
     echo.
