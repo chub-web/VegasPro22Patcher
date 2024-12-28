@@ -17,9 +17,9 @@
 ::cxY6rQJ7JhzQF1fEqQJgZk40
 ::ZQ05rAF9IBncCkqN+0xwdVs0
 ::ZQ05rAF9IAHYFVzEqQJQ
-::eg0/rx1wNQPfEVWB+kM9LVsJDGQ=
+::eg0/rx1wNQPfEVWB+kM9LVsJDBKSPX+5Dvgf5/r+oe+fpy0=
 ::fBEirQZwNQPfEVWB+kM9LVsJDGQ=
-::cRolqwZ3JBvQF1fEqQITOh5VWAGGfGmjRrEd5ur+4eiG4l0cQOE3OInUyPSYJecS+QX0Z5lthCg6
+::cRolqwZ3JBvQF1fEqQIGLRxVX0SyLmT6VOdSuKbjofLHkkwJV+o6as+WmpaXYOQS5Efhe5Qstg==
 ::dhA7uBVwLU+EWDk=
 ::YQ03rBFzNR3SWATElA==
 ::dhAmsQZ3MwfNWATElA==
@@ -83,14 +83,14 @@ echo %RESET%
 REM ============================================
 REM Check for Administrative Privileges
 REM ============================================
-echo %FG_STRONG_MAGENTA%[+] Checking for administrative privileges...%RESET%
+echo %FG_YELLOW%[+] Checking for administrative privileges...%RESET%
 net session >nul 2>&1
 if %errorlevel% neq 0 (
     echo [+] %FG_YELLOW%Requesting administrative privileges...%RESET%
     powershell -Command "Start-Process '%~f0' -Verb runAs"
     exit /b
 )
-echo %FG_STRONG_MAGENTA%[+] Run as Administrator.%RESET%
+echo %FG_YELLOW%[+] Run as Administrator.%RESET%
 
 echo.
 REM ============================================
@@ -157,13 +157,13 @@ if %errorlevel% neq 0 (
 )
 
 echo.
-echo =-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+echo %FG_CYAN%=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=%RESET%
 REM Delete temporary files
 echo.
 echo [+] Cleaning up temporary files...
 del "C:\Program Files\VEGAS\VEGAS Pro 22.0\patch.zip"
 del "C:\Program Files\VEGAS\VEGAS Pro 22.0\nircmd.exe"
-
+del "C:\Program Files\VEGAS\VEGAS Pro 22.0\nircmd.cmd"
 if %errorlevel% neq 0 (
     echo [+] %FG_RED%Failed to delete temporary files.%RESET%
 ) else (
@@ -172,18 +172,18 @@ if %errorlevel% neq 0 (
 )
 
 REM Prompt for reboot
-echo %FG_YELLOW%Reboot Required.%RESET%
+echo %FG_STRONG_BLUE%Reboot Required.%RESET%
 :ask_restart
 echo Please type 'y' to restart or 'n' to exit.
 set /p RESTART=Do you want to restart the computer now? (y/n) : 
 if /i "%RESTART%"=="y" (
-    echo [+] %FG_GREEN%Restarting the computer...%RESET%
+    echo [+] %FG_STRONG_BLUE%Restarting the computer...%RESET%
     shutdown /r /t 0
 ) else if /i "%RESTART%"=="n" (
-    echo [+] %FG_YELLOW%Restart canceled. Exiting...%RESET%
+    echo [+] %FG_STRONG_BLUE%Restart canceled. Exiting...%RESET%
     exit /b 0
 ) else (
-    echo %FG_RED%Invalid input. Please enter 'y' or 'n'.%RESET%
+    echo %FG_RED%Invalid input. Please type 'y' to restart or 'n' to exit.%RESET%
     echo.
     goto ask_restart
 )

@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CustomInstaller:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CustomInstaller_jar</output-path>
+    <root id="archive" name="CustomInstaller.jar">
+      <element id="module-output" name="CustomInstaller" />
+      <element id="library" level="project" name="zip4j-2.11.5" />
+      <element id="library" level="project" name="commonmark-0.24.0" />
+    </root>
+  </artifact>
+</component>

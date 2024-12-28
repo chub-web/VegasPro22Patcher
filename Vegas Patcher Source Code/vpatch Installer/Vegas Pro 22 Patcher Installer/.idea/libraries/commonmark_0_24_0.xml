@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="commonmark-0.24.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/commonmark-0.24.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/zip4j-2.11.5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
